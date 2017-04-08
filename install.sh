@@ -84,8 +84,10 @@ install_vim()
 
     dnf install -y clang-devel ctags cscope python3-jedi
 
-
     cp _vimrc $_USER_HOME/.vimrc
+
+    # 安装插件
+    vim +PluginInstall +qall
 }
 
 check_root

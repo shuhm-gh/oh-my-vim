@@ -23,11 +23,6 @@ dnf install -y lua-devel python-devel python3-devel tcl-devel ruby-devel ncurses
 make && make install
 ```
 
-##### 配置 vim
-```
-cp _vimrc $_USER_HOME/.vimrc
-```
-
 ##### 安装字体
 插件 vim-devicons 和 vim-airline 依赖于本字体
 ```
@@ -52,4 +47,14 @@ dnf install -y python3-jedi
 tagbar, 各种跳转功能插件依赖:
 ```
 dnf install -y ctags cscope
+```
+
+##### 配置 vim
+```
+cp _vimrc $_USER_HOME/.vimrc
+```
+
+##### 安装插件
+```
+vim +PluginInstall +qall
 ```
