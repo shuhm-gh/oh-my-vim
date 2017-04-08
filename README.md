@@ -4,9 +4,9 @@
 * `sudo ./install [user]`
 
 >
-> 如想安装指定版本的 vim,
-> 注释掉 install.sh 脚本 install_vim 函数中 `git clone https://github.com/vim/vim.git $VIMSRC_DIR` 行
-> 并自行下载 vim 源代码放到 vim_src 目录
+> 如想安装指定版本的 vim<br>
+> 注释掉 install.sh 脚本 install_vim 函数中 `git clone https://github.com/vim/vim.git $VIMSRC_DIR` 行<br>
+> 并自行下载 vim 源代码放到 vim_src 目录<br>
 > 运行`sudo ./install [user]`
 
 ### install.sh 说明
