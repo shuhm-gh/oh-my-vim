@@ -2,11 +2,11 @@
 
 ### 安装配置 oh-my-vim
 * `sudo ./install [user]`
-
+* 修改终端字体 `gnome-terminal -> Edit -> Profile Preferences -> General -> Text Appearance -> Custom font -> DroidSansMonoForPowerline Nerd Font Book 12`
 >
 > 如想安装指定版本的 vim<br>
 > 注释掉 install.sh 脚本 install_vim 函数中 `git clone https://github.com/vim/vim.git $VIMSRC_DIR` 行<br>
-> 并自行下载 vim 源代码放到 vim_src 目录<br>
+> 并自行下载 vim 源代码放到 vim_src 目录(vim_src 目录需自行创建)<br>
 > 运行`sudo ./install [user]`
 
 ### install.sh 说明
