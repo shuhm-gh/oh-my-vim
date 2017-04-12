@@ -19,6 +19,11 @@ Plugin 'ronakg/quickr-cscope.vim'
 Plugin 'Rip-Rip/clang_complete'
 Plugin 'davidhalter/jedi-vim'
 
+"Plugin 'moll/vim-node'
+Plugin 'pangloss/vim-javascript'
+Plugin 'walm/jshint.vim'
+Plugin 'ternjs/tern_for_vim'
+
 Plugin 'plasticboy/vim-markdown'
 Plugin 'suan/vim-instant-markdown'
 
@@ -57,6 +62,10 @@ Plugin 'mileszs/ack.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+let g:pymode_python = 'python3'
+"autocmd FileType python python3 sys.path.append('.')
+autocmd VimEnter *.py python3 sys.path.append('.')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -469,8 +478,12 @@ set nocompatible
 "set completeopt=longest,menu
 " Complete options (disable preview scratch window)
 set completeopt=menu,menuone,longest
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>" 
+"set completeopt-=preview 
+
 "autocmd FileType python imap <TAB> <C-Space>
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
+
 "build python to find errors
 "autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 "autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line%l%.%#,%Z%[%^\ ]%\\@=%m
@@ -543,6 +556,13 @@ let g:clang_use_library=1
 let g:clang_library_path='/usr/lib64/libclang.so'
 "let g:clang_library_path='/usr/lib64'
 
+" js
+let g:tern_show_argument_hints = 'on_hold'
+let g:tern_show_signature_in_pum = 1
+
+let jshint2_command = '~/path/to/node_modules/.bin/jshint'
+
+" markdown
 let g:vim_markdown_folding_disabled = 1
 
 " tagbar
@@ -619,6 +639,8 @@ map <C-S-r> :NERDTreeToggle<CR>
 "打开文件后会自动激活NERDTree窗口，很不方便，每次都要进行窗口切换
 "autocmd VimEnter * NERDTree
 
+let g:jedi#force_py_version=3
+let g:jedi#smart_auto_mappings = 0
 "let g:jedi#completions_enabled = 0
 "let g:pydiction_location='$HOME/.vim/complete-dict'
 
