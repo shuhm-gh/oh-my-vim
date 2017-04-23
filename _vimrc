@@ -46,6 +46,8 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'vim-syntastic/syntastic'
 
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'ryanoasis/vim-devicons'
@@ -58,6 +60,11 @@ Plugin 'gko/vim-coloresque'
 
 Plugin 'will133/vim-dirdiff'
 Plugin 'mileszs/ack.vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+"Plugin 'tmhedberg/SimpylFold'
+Plugin 'nvie/vim-flake8'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -205,8 +212,26 @@ set expandtab
 set smarttab
 
 " 1 tab == 4 spaces, python编码时还是4, 可能是python插件的行为
-set shiftwidth=4 "C/C++换行时的缩进
 set tabstop=4
+set softtabstop=4
+set shiftwidth=4 "C/C++换行时的缩进
+
+"set autoindent
+set textwidth=79
+
+"autocmd FileType python set tabstop=4 | set expandtab | set autoindent
+
+"au BufNewFile,BufRead *.py
+"\ set tabstop=4
+"\ set softtabstop=4
+"\ set shiftwidth=4
+"\ set textwidth=79
+"\ set expandtab
+"\ set autoindent
+"\ set fileformat=unix
+
+" 多余的空格
+"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " Linebreak on 500 characters
 set lbr
@@ -214,7 +239,7 @@ set tw=500
 
 "smartindent 使 python 中 # 自动回退到行首
 set ai "Auto indent
-"set si "Smart indent
+set si "Smart indent
 set wrap "Wrap lines
 
 
@@ -235,8 +260,8 @@ map j gj
 map k gk
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
+" map <space> /
+" map <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -298,6 +323,7 @@ set viminfo^=%
 """"""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
+set statusline+=%{fugitive#statusline()}
 
 " Format the status line
 "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
@@ -643,6 +669,8 @@ let g:jedi#force_py_version=3
 let g:jedi#smart_auto_mappings = 0
 "let g:jedi#completions_enabled = 0
 "let g:pydiction_location='$HOME/.vim/complete-dict'
+
+"let g:SimpylFold_docstring_preview=1
 
 "command -nargs=* R cexpr system('<args>') | copen
 "E183: User defined commands must start with an uppercase letter
