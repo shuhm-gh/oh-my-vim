@@ -65,6 +65,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 "Plugin 'tmhedberg/SimpylFold'
 Plugin 'nvie/vim-flake8'
+Plugin 'Vimjas/vim-python-pep8-indent'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -220,6 +221,8 @@ set shiftwidth=4 "C/C++换行时的缩进
 set textwidth=79
 
 "autocmd FileType python set tabstop=4 | set expandtab | set autoindent
+autocmd FileType python call Flake8()
+"autocmd BufWritePost *.py call Flake8()
 
 "au BufNewFile,BufRead *.py
 "\ set tabstop=4
@@ -239,7 +242,7 @@ set tw=500
 
 "smartindent 使 python 中 # 自动回退到行首
 set ai "Auto indent
-set si "Smart indent
+"set si "Smart indent
 set wrap "Wrap lines
 
 
@@ -386,7 +389,7 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 vnoremap <silent> gv :call VisualSelection('gv')<CR>
 
 " Open vimgrep and put the cursor in the right position
-map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+"map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 
 " Vimgreps in the current file
 map <leader><space> :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>

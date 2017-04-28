@@ -57,7 +57,7 @@ install_md_intant()
 install_vim()
 {
     # 安装依赖
-    dnf install -y lua-devel python-devel python3-devel tcl-devel ruby-devel ncurses-devel libXt-devel
+    dnf install -y lua-devel python3-devel tcl-devel ruby-devel ncurses-devel libXt-devel
 
     #git clone https://github.com/vim/vim.git $VIMSRC_DIR
 
@@ -67,7 +67,18 @@ install_vim()
     make clean > $NULL 2>>$LOG_ERR_FILE
 
     # --enable-pythoninterp=yes --with-python-config-dir=/usr/lib64/python2.7/config
-    ./configure --with-features=huge --enable-fail-if-missing --enable-luainterp=yes --enable-mzschemeinterp --enable-tclinterp=yes --enable-python3interp=yes --with-python3-config-dir=/usr/lib64/python3.5/config-3.5m --enable-cscope --with-x=yes --prefix=/usr/ --with-compiledby=$_USER > $NULL 2>>$LOG_ERR_FILE
+    ./configure \
+        --with-features=huge \
+        --enable-fail-if-missing \
+        --enable-luainterp=yes \
+        --enable-mzschemeinterp \
+        --enable-tclinterp=yes \
+        --enable-python3interp=yes \
+        --with-python3-config-dir=/usr/lib64/python3.5/config-3.5m \
+        --enable-cscope \
+        --with-x=yes \
+        --prefix=/usr/ \
+        --with-compiledby=$_USER > $NULL 2>>$LOG_ERR_FILE
 
     make -j $((`nproc`*2)) > $NULL 2>>$LOG_ERR_FILE && make install > $NULL 2>>$LOG_ERR_FILE
 
@@ -85,7 +96,8 @@ install_vim()
     # install md instant
     install_md_intant
 
-    dnf install -y clang-devel ctags cscope python3-jedi
+    dnf install -y clang-devel ctags cscope python3-jedi python3-flake8
+    ln -s /usr/bin/flake8-3 /usr/bin/flake8
 
     cp _vimrc $_USER_HOME/.vimrc
 
