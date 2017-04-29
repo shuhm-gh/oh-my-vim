@@ -96,8 +96,10 @@ install_vim()
     # install md instant
     install_md_intant
 
-    dnf install -y clang-devel ctags cscope python3-jedi python3-flake8
+    dnf install -y clang-devel ctags cscope
+    dnf install -y python3-jedi python3-flake8 python3-autopep8
     ln -s /usr/bin/flake8-3 /usr/bin/flake8
+    ln -s /usr/bin/python3-autopep8 /usr/bin/autopep8
 
     cp _vimrc $_USER_HOME/.vimrc
 

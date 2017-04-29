@@ -66,6 +66,7 @@ Plugin 'airblade/vim-gitgutter'
 "Plugin 'tmhedberg/SimpylFold'
 Plugin 'nvie/vim-flake8'
 Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'tell-k/vim-autopep8'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -221,8 +222,8 @@ set shiftwidth=4 "C/C++换行时的缩进
 set textwidth=79
 
 "autocmd FileType python set tabstop=4 | set expandtab | set autoindent
-autocmd FileType python call Flake8()
-"autocmd BufWritePost *.py call Flake8()
+"autocmd FileType python call Flake8()
+autocmd BufWritePost *.py call Flake8()
 
 "au BufNewFile,BufRead *.py
 "\ set tabstop=4
@@ -667,6 +668,12 @@ map <C-S-r> :NERDTreeToggle<CR>
 "autocmd BufRead * NERDTree "Ctrl-P
 "打开文件后会自动激活NERDTree窗口，很不方便，每次都要进行窗口切换
 "autocmd VimEnter * NERDTree
+
+let g:autopep8_aggressive=2
+
+"using flake8 as a python syntax checker 
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args='--ignore=E501,E225'
 
 let g:jedi#force_py_version=3
 let g:jedi#smart_auto_mappings = 0
