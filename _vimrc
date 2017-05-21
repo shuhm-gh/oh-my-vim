@@ -25,7 +25,7 @@ Plugin 'walm/jshint.vim'
 Plugin 'ternjs/tern_for_vim'
 
 Plugin 'plasticboy/vim-markdown'
-Plugin 'suan/vim-instant-markdown'
+"Plugin 'suan/vim-instant-markdown'
 
 "Plugin 'jiangmiao/auto-pairs'
 
