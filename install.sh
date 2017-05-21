@@ -95,6 +95,7 @@ install_vim()
     rm -rf $VIMSRC_DIR > $NULL 2>>$LOG_ERR_FILE
 
     git clone https://github.com/VundleVim/Vundle.vim.git $_USER_HOME/.vim/bundle/Vundle.vim
+    chown -R $_USER:$_USER $_USER_HOME/.vim
 
     # install nerd font
     install_font
