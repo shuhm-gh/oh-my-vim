@@ -36,7 +36,7 @@ check_root()
 check_os()
 {
     RELCFG="/etc/redhat-release"
-    if ! grep "Fedora release 25" $RELCFG > /dev/null; then
+    if ! grep "CentOS Linux release 7" $RELCFG > /dev/null; then
         echo -e "this config script is only for Fedora release 25 (Twenty Five)\nexit..."
         exit
     fi
@@ -57,7 +57,12 @@ install_md_intant()
 install_vim()
 {
     # 安装依赖
-    dnf install -y lua-devel python3-devel tcl-devel ruby-devel ncurses-devel libXt-devel
+    yum install -y git gcc
+
+    # 安装依赖, python34-devel是epel仓库中的包
+    yum install -y python3-devel
+    # 安装依赖, python34-devel是epel仓库中的包
+    yum install -y lua-devel tcl-devel ruby-devel ncurses-devel libXt-devel
 
     #git clone https://github.com/vim/vim.git $VIMSRC_DIR
 
@@ -74,7 +79,7 @@ install_vim()
         --enable-mzschemeinterp \
         --enable-tclinterp=yes \
         --enable-python3interp=yes \
-        --with-python3-config-dir=/usr/lib64/python3.5/config-3.5m \
+        --with-python3-config-dir=/usr/lib64/python3.4/config-3.4m \
         --enable-cscope \
         --with-x=yes \
         --prefix=/usr/ \
@@ -94,10 +99,10 @@ install_vim()
     # install nerd font
     install_font
     # install md instant
-    install_md_intant
+    #install_md_intant
 
-    dnf install -y clang-devel ctags cscope
-    dnf install -y python3-jedi python3-flake8 python3-autopep8
+    yum install -y clang-devel ctags cscope
+    pip3 install jedi flake8 autopep8
     ln -s /usr/bin/flake8-3 /usr/bin/flake8
     ln -s /usr/bin/python3-autopep8 /usr/bin/autopep8
 
