@@ -108,6 +108,7 @@ install_vim()
     ln -s /usr/bin/python3-autopep8 /usr/bin/autopep8
 
     cp _vimrc $_USER_HOME/.vimrc
+    chown -R $_USER:$_USER $_USER_HOME/.vimrc
 
     # 安装插件
     vim +PluginInstall +qall
