@@ -61,6 +61,7 @@ install_vim()
 
     # 安装依赖, python34-devel是epel仓库中的包
     yum install -y python34-devel
+    yum install -y python34-pip
     # 安装依赖, python34-devel是epel仓库中的包
     yum install -y lua-devel tcl-devel ruby-devel ncurses-devel libXt-devel
 
