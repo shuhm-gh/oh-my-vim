@@ -16,7 +16,8 @@ dnf install -y lua-devel python-devel python3-devel tcl-devel ruby-devel ncurses
 ```
 
 ### 编译 vim 源代码
-下载 vim 源代码放放到目录 vim_src/
+
+下载 [vim 源代码](https://github.com/vim/vim/releases)放放到目录 vim_src/
 ```
 ./configure --with-features=huge --enable-fail-if-missing --enable-luainterp=yes --enable-mzschemeinterp --enable-tclinterp=yes --enable-pythoninterp=yes --with-python-config-dir=/usr/lib64/python2.7/config --enable-python3interp=yes --with-python3-config-dir=/usr/lib64/python3.5/config-3.5m --enable-cscope --with-x=yes --prefix=/usr/ --with-compiledby=$_USER
 
@@ -28,7 +29,7 @@ make && make install
 ```
 mkdir -p $_USER_HOME/.local/share/fonts
 cp $VIMROOT/Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete.otf $_USER_HOME/.local/share/fonts
-fc-cache -vf $_USER_HOME/.local/share/fonts/
+fc-cache -vf $_USER_HOME/https://github.com/vim/vim/archive/v8.0.0604.tar.gz.local/share/fonts/
 ```
 
 ### 安装重要插件所需依赖
