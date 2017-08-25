@@ -17,6 +17,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ervandew/supertab'
 Plugin 'ronakg/quickr-cscope.vim'
 Plugin 'Rip-Rip/clang_complete'
+Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'davidhalter/jedi-vim'
 
 "Plugin 'moll/vim-node'
@@ -504,11 +505,14 @@ endfunction
 
 """
 
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
 set nocompatible
 "set completeopt=longest,menu
 " Complete options (disable preview scratch window)
 set completeopt=menu,menuone,longest
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>" 
+autocmd FileType java let g:SuperTabDefaultCompletionType = "<c-x><c-o>" 
 "set completeopt-=preview 
 
 "autocmd FileType python imap <TAB> <C-Space>
