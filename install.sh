@@ -104,6 +104,9 @@ install_vim()
     #install_md_intant
 
     yum install -y clang-devel ctags cscope
+    if [ -f /usr/lib64/llvm/libclang.so ]; then
+        ln -sf /usr/lib64/llvm/libclang.so /usr/lib64/libclang.so
+    fi
     pip3 install jedi flake8 autopep8
     ln -s /usr/bin/flake8-3 /usr/bin/flake8
     ln -s /usr/bin/python3-autopep8 /usr/bin/autopep8
