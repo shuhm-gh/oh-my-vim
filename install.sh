@@ -115,7 +115,8 @@ install_vim()
     chown -R $_USER:$_USER $_USER_HOME/.vimrc
 
     # 安装插件
-    vim +PluginInstall +qall
+    vim -u $_USER_HOME/.vimrc +PluginInstall +qall
+    sed -i 's/"\(colorscheme solarized\)/\1/' $_USER_HOME/.vimrc
 }
 
 check_root
