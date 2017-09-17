@@ -176,8 +176,8 @@ syntax enable
 set background=dark
 "set t_Co=256 
 let g:solarized_termcolors=256
-colorscheme solarized
-call togglebg#map("<F5>")
+"colorscheme solarized
+"call togglebg#map("<F5>")
 
 "autocmd VimEnter * ToggleBG
 
