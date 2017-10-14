@@ -608,7 +608,7 @@ let g:tagbar_width=30
 "设置tagbar的窗口显示的位置,为左边  
 "let g:tagbar_left=1  
 "打开文件自动 打开tagbar  
-autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.js,*.py call tagbar#autoopen()  
+"autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.js,*.py call tagbar#autoopen()  
 "映射tagbar的快捷键  
 "map <F8> :TagbarToggle<CR> 
 
