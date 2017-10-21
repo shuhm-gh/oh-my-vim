@@ -555,7 +555,7 @@ cabbrev copen bot copen
 " -I/usr/include/QtCore/
 " -I.
 " Disable auto popup, use <Tab> to autocomplete
-let g:clang_complete_auto = 0
+let g:clang_complete_auto = 1
 " Show clang errors in the quickfix window
 let g:clang_complete_copen = 1
 " if there's an error, allow us to see it
