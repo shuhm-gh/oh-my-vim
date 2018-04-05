@@ -1,5 +1,10 @@
 #! /bin/bash
 
+if [ `id -u` -ne 0 ]; then
+    echo "only root can run this script..."
+    exit
+fi
+
 # sudo -> $USER is 'root'
 if (($# == 1)); then
     _USER=$1
@@ -25,22 +30,23 @@ LOG_ERR_FILE=log-err-$DATE_TAIL
 NULL=/dev/null
 #NULL=/dev/stdout
 
-check_root()
-{
-    if [ `id -u` -ne 0 ]; then
-        echo "only root can run this script..."
-        exit
-    fi
-}
+RELCFG="/etc/redhat-release"
+if grep "CentOS Linux release 7" $RELCFG > /dev/null; then
+    OS="CentOS"
+elif grep "Fedora release 27 (Twenty Seven)" $RELCFG > /dev/null; then
+    OS="Fedora"
+else
+    echo -e "this config script is only for Fedora and CentOS...\nexit..."
+    exit
+fi
 
-check_os()
-{
-    RELCFG="/etc/redhat-release"
-    if ! grep "CentOS Linux release 7" $RELCFG > /dev/null; then
-        echo -e "this config script is only for Fedora release 25 (Twenty Five)\nexit..."
-        exit
-    fi
-}
+if [ $OS = "Fedora" ]; then
+    INSTALL="dnf install -y"
+    PY3_CONF_PATH="/usr/lib64/python3.6/config-3.6m-x86_64-linux-gnu/"
+else
+    INSTALL="yum install -y"
+    PY3_CONF_PATH="/usr/lib64/python3.4/config-3.4m"
+fi
 
 install_font()
 {
@@ -59,9 +65,11 @@ install_vim()
     # 安装依赖
     yum install -y git gcc
 
-    # 安装依赖, python34-devel是epel仓库中的包
-    yum install -y python34-devel
-    yum install -y python34-pip
+    if [ $OS = "CentOS" ]; then
+        # 安装依赖, python34-devel是epel仓库中的包
+        yum install -y python34-devel
+        yum install -y python34-pip
+    fi
     # 安装依赖, python34-devel是epel仓库中的包
     yum install -y lua-devel tcl-devel ruby-devel ncurses-devel libXt-devel
 
@@ -80,7 +88,7 @@ install_vim()
         --enable-mzschemeinterp \
         --enable-tclinterp=yes \
         --enable-python3interp=yes \
-        --with-python3-config-dir=/usr/lib64/python3.4/config-3.4m \
+        --with-python3-config-dir=$PY3_CONF_PATH \
         --enable-cscope \
         --with-x=yes \
         --prefix=/usr/ \
@@ -119,6 +127,4 @@ install_vim()
     sed -i 's/"\(colorscheme solarized\)/\1/' $_USER_HOME/.vimrc
 }
 
-check_root
-check_os
 install_vim
