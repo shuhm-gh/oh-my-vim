@@ -67,9 +67,11 @@ install_vim()
 
     if [ $OS = "CentOS" ]; then
         # 安装依赖, python34-devel是epel仓库中的包
+        #yum install -y python-devel
         yum install -y python34-devel
         yum install -y python34-pip
     else
+        #dnf install -y python-devel
         dnf install -y python3-devel
     fi
     # 安装依赖, python34-devel是epel仓库中的包
@@ -83,7 +85,7 @@ install_vim()
     make clean > $NULL 2>>$LOG_ERR_FILE
 
     # --enable-pythoninterp=yes --with-python-config-dir=/usr/lib64/python2.7/config
-    ./configure \
+    PARAM_CONF="
         --with-features=huge \
         --enable-fail-if-missing \
         --enable-luainterp=yes \
@@ -94,13 +96,17 @@ install_vim()
         --enable-cscope \
         --with-x=yes \
         --prefix=/usr/ \
-        --with-compiledby=$_USER > $NULL 2>>$LOG_ERR_FILE
+        --with-compiledby=$_USER"
+    echo $PARAM_CONF
+    #NULL=/dev/stdout
+    ./configure $PARAM_CONF > $NULL 2>>$LOG_ERR_FILE
 
     make -j $((`nproc`*2)) > $NULL 2>>$LOG_ERR_FILE && make install > $NULL 2>>$LOG_ERR_FILE
 
     make distclean > $NULL 2>>$LOG_ERR_FILE
     make clean > $NULL 2>>$LOG_ERR_FILE
 
+    exit
     cd $VIMROOT > $NULL
 
     rm -rf $VIMSRC_DIR > $NULL 2>>$LOG_ERR_FILE
