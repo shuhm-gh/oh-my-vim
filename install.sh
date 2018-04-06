@@ -69,6 +69,8 @@ install_vim()
         # 安装依赖, python34-devel是epel仓库中的包
         yum install -y python34-devel
         yum install -y python34-pip
+    else
+        dnf install -y python3-devel
     fi
     # 安装依赖, python34-devel是epel仓库中的包
     yum install -y lua-devel tcl-devel ruby-devel ncurses-devel libXt-devel
@@ -123,8 +125,7 @@ install_vim()
     chown -R $_USER:$_USER $_USER_HOME/.vimrc
 
     # 安装插件
-    vim -u $_USER_HOME/.vimrc +PluginInstall +qall
-    sed -i 's/"\(colorscheme solarized\)/\1/' $_USER_HOME/.vimrc
+    vim -u $_USER_HOME/.vimrc +PluginInstall +qall && sed -i 's/"\(colorscheme solarized\)/\1/' $_USER_HOME/.vimrc
 }
 
 install_vim
