@@ -106,7 +106,7 @@ install_vim()
     make distclean > $NULL 2>>$LOG_ERR_FILE
     make clean > $NULL 2>>$LOG_ERR_FILE
 
-    exit
+    #exit
     cd $VIMROOT > $NULL
 
     rm -rf $VIMSRC_DIR > $NULL 2>>$LOG_ERR_FILE
