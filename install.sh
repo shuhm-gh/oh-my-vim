@@ -23,6 +23,19 @@ ROOT=${ROOT%/*}
 
 VIMROOT=$ROOT
 VIMSRC_DIR=$ROOT/vim_src
+if [ ! -d $VIMSRC_DIR ]; then
+    for f in vim-*; do if [ -d $f ]; then TMP_DIR=$f; break; elif [ -f $f ]; then TMP_FILE=$f; fi; done
+    if [ -n "$TMP_DIR" ]; then
+        ln -s $TMP_DIR vim_src
+    elif [ -n "$TMP_FILE" ]; then
+        tar zxf $TMP_FILE
+        TMP_DIR=`echo $TMP_FILE | sed -n 's/\(.*\).tar.gz/\1/p'`
+        ln -s $TMP_DIR vim_src
+    else
+        echo "no vim src found\nexit..."
+        exit
+    fi
+fi
 
 DATE_TAIL=`date "+%y%m%d"`
 LOG_ERR_FILE=log-err-$DATE_TAIL
@@ -131,7 +144,7 @@ install_vim()
     chown -R $_USER:$_USER $_USER_HOME/.vimrc
 
     # 安装插件
-    vim -u $_USER_HOME/.vimrc +PluginInstall +qall && sed -i 's/"\(colorscheme solarized\)/\1/' $_USER_HOME/.vimrc
+    #vim -u $_USER_HOME/.vimrc +PluginInstall +qall && sed -i 's/"\(colorscheme solarized\)/\1/' $_USER_HOME/.vimrc
 }
 
 install_vim
