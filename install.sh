@@ -61,6 +61,14 @@ else
     PY3_CONF_PATH="/usr/lib64/python3.4/config-3.4m"
 fi
 
+function dnf_install {
+    for i in $*; do
+        echo `date "+%Y-%m-%d %H:%M:%S"` $INSTALL $i
+        sudo $INSTALL $i > /dev/null 2>&1
+        #sudo $INSTALL $i
+    done
+}
+
 install_font()
 {
     mkdir -p $_USER_HOME/.local/share/fonts
@@ -76,19 +84,25 @@ install_md_intant()
 install_vim()
 {
     # 安装依赖
-    yum install -y git gcc
+    dnf_install git gcc
 
     if [ $OS = "CentOS" ]; then
         # 安装依赖, python34-devel是epel仓库中的包
-        #yum install -y python-devel
-        yum install -y python34-devel
-        yum install -y python34-pip
+        #dnf_install python-devel
+        dnf_install python34-devel
+        dnf_install python34-pip
     else
         #dnf install -y python-devel
-        dnf install -y python3-devel
+        dnf_install python3-devel
     fi
     # 安装依赖, python34-devel是epel仓库中的包
-    yum install -y lua-devel tcl-devel ruby-devel ncurses-devel libXt-devel
+    dnf_install lua-devel tcl-devel ruby-devel ncurses-devel libXt-devel
+
+    #
+    dnf_install clang-devel ctags cscope
+    if [ -f /usr/lib64/llvm/libclang.so ]; then
+        ln -sf /usr/lib64/llvm/libclang.so /usr/lib64/libclang.so
+    fi
 
     #git clone https://github.com/vim/vim.git $VIMSRC_DIR
 
@@ -132,10 +146,6 @@ install_vim()
     # install md instant
     #install_md_intant
 
-    yum install -y clang-devel ctags cscope
-    if [ -f /usr/lib64/llvm/libclang.so ]; then
-        ln -sf /usr/lib64/llvm/libclang.so /usr/lib64/libclang.so
-    fi
     pip3 install jedi flake8 autopep8
     ln -s /usr/bin/flake8-3 /usr/bin/flake8
     ln -s /usr/bin/python3-autopep8 /usr/bin/autopep8
