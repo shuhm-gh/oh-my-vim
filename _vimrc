@@ -90,6 +90,8 @@ Glaive codefmt plugin[mappings]
 "let g:clang_format#code_style = 'google'
 "clang-format -style=google -dump-config > .clang-format
 
+filetype plugin indent on    " required
+
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
   autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
@@ -101,8 +103,6 @@ augroup autoformat_settings
   autocmd FileType python AutoFormatBuffer yapf
   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
 augroup END
-
-filetype plugin indent on    " required
 
 let g:pymode_python = 'python3'
 "autocmd FileType python python3 sys.path.append('.')
