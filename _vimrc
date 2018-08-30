@@ -621,6 +621,10 @@ let g:clang_use_library=1
 let g:clang_library_path='/usr/lib64/libclang.so'
 "let g:clang_library_path='/usr/lib64'
 
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+"let g:syntastic_cpp_compiler = 'clang++'
+"let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
 " js
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_show_signature_in_pum = 1
