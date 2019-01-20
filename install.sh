@@ -53,12 +53,15 @@ else
     exit
 fi
 
+PY3_VER=`python3 --version`
+PY3_VER=${PY3_VER:7:3}
+
 if [ $OS = "Fedora" ]; then
     INSTALL="dnf install -y"
-    PY3_CONF_PATH="/usr/lib64/python3.6/config-3.6m-x86_64-linux-gnu/"
+    PY3_CONF_PATH="/usr/lib64/python${PY3_VER}/config-${PY3_VER}m-x86_64-linux-gnu/"
 else
     INSTALL="yum install -y"
-    PY3_CONF_PATH="/usr/lib64/python3.4/config-3.4m"
+    PY3_CONF_PATH="/usr/lib64/python${PY3_VER}/config-${PY3_VER}m"
 fi
 
 function dnf_install {
